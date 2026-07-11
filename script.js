@@ -49,9 +49,14 @@ const viewerTitle = viewer.querySelector(".viewer__title");
 const closeButton = viewer.querySelector(".viewer__close");
 const previousButton = viewer.querySelector(".viewer__nav--prev");
 const nextButton = viewer.querySelector(".viewer__nav--next");
+const caseSheet = document.querySelector("#caseSheet");
+const caseSheetFrame = caseSheet.querySelector(".case-sheet__frame");
+const caseSheetClose = caseSheet.querySelector(".case-sheet__close");
 let activeIndex = 0;
 let wheelLock = false;
 let touchStartY = 0;
+let caseSheetIndex = 0;
+let caseSheetClearTimer = 0;
 
 function pad(value) {
   return String(value).padStart(2, "0");
@@ -124,6 +129,32 @@ function closeViewer() {
   trigger?.focus({ preventScroll: true });
 }
 
+function openCaseSheet(index) {
+  const item = cases[index];
+  if (!item?.href) return;
+
+  window.clearTimeout(caseSheetClearTimer);
+  caseSheetIndex = index;
+  caseSheetFrame.title = `Кейс ${item.title}`;
+  caseSheetFrame.src = item.href;
+  caseSheet.classList.add("is-open");
+  caseSheet.setAttribute("aria-hidden", "false");
+  document.documentElement.classList.add("is-locked");
+  caseSheetClose.focus({ preventScroll: true });
+}
+
+function closeCaseSheet() {
+  caseSheet.classList.remove("is-open");
+  caseSheet.setAttribute("aria-hidden", "true");
+  document.documentElement.classList.remove("is-locked");
+
+  const trigger = gallery.querySelector(`[data-index="${caseSheetIndex}"]`);
+  trigger?.focus({ preventScroll: true });
+  caseSheetClearTimer = window.setTimeout(() => {
+    caseSheetFrame.src = "about:blank";
+  }, 720);
+}
+
 function showNext(direction) {
   activeIndex = (activeIndex + direction + cases.length) % cases.length;
   renderViewer();
@@ -154,7 +185,7 @@ gallery.addEventListener("click", (event) => {
   if (!card) return;
   const item = cases[Number(card.dataset.index)];
   if (item.href) {
-    window.location.href = item.href;
+    openCaseSheet(Number(card.dataset.index));
     return;
   }
   openViewer(Number(card.dataset.index));
@@ -167,13 +198,17 @@ gallery.addEventListener("keydown", (event) => {
   event.preventDefault();
   const item = cases[Number(card.dataset.index)];
   if (item.href) {
-    window.location.href = item.href;
+    openCaseSheet(Number(card.dataset.index));
     return;
   }
   openViewer(Number(card.dataset.index));
 });
 
 closeButton.addEventListener("click", closeViewer);
+caseSheetClose.addEventListener("click", closeCaseSheet);
+caseSheet.addEventListener("click", (event) => {
+  if (event.target === caseSheet) closeCaseSheet();
+});
 previousButton.addEventListener("click", () => showNext(-1));
 nextButton.addEventListener("click", () => showNext(1));
 
@@ -198,6 +233,10 @@ viewer.addEventListener("touchend", (event) => {
 });
 
 window.addEventListener("keydown", (event) => {
+  if (caseSheet.classList.contains("is-open")) {
+    if (event.key === "Escape") closeCaseSheet();
+    return;
+  }
   if (!viewer.classList.contains("is-open")) return;
   if (event.key === "Escape") closeViewer();
   if (event.key === "ArrowRight" || event.key === "ArrowDown") showNext(1);

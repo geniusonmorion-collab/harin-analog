@@ -136,6 +136,10 @@ h3 {
   justify-self: end;
 }
 
+.case-embedded .case-page__header {
+  display: none;
+}
+
 .case-study {
   width: min(100%, 1972px);
   display: grid;
@@ -235,42 +239,14 @@ h3 {
   background: linear-gradient(131deg, #f6f6f6 11%, #e7e7e7 89%);
 }
 
-.case-study__app-icon {
-  width: clamp(82px, 8.1vw, 159px);
-  aspect-ratio: 1;
-  display: grid;
-  place-items: center;
-  border-radius: clamp(16px, 1.55vw, 30px);
-  background: #000;
-  color: #fff;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(68px, 6.5vw, 128px);
-  font-weight: 400;
-  line-height: 0.8;
-}
-
-.case-study__app-badge {
-  width: clamp(28px, 2.4vw, 47px);
-  height: clamp(28px, 2.4vw, 47px);
-  display: grid;
-  place-items: center;
+.case-study__app-mark video {
+  width: 100%;
+  height: 100%;
+  display: block;
   position: absolute;
-  top: 22%;
-  left: 59.5%;
-  z-index: 1;
-  border-radius: 999px;
-  background: #bc351e;
-  color: #fff;
-  font-size: clamp(14px, 1.2vw, 24px);
-}
-
-.case-study__app-name {
-  position: absolute;
-  top: 77%;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #454545;
-  font-size: clamp(12px, 1vw, 20px);
+  inset: 0;
+  object-fit: cover;
+  object-position: center 49%;
 }
 
 .case-study__story {
@@ -371,6 +347,12 @@ h3 {
 
 .case-study__media--checkout {
   aspect-ratio: 1952 / 1220;
+  background: #efefef;
+}
+
+.case-study__media--checkout img {
+  object-fit: contain;
+  padding-block: clamp(12px, 1.5vw, 30px);
 }
 
 .case-study__split--research {
@@ -1915,6 +1897,107 @@ h1 {
   text-align: right;
 }
 
+.case-sheet {
+  --case-sheet-top: clamp(8px, 1.25vw, 20px);
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  padding-top: var(--case-sheet-top);
+  background: rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 360ms ease,
+    visibility 0s linear 720ms;
+}
+
+.case-sheet.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+
+.case-sheet__surface {
+  width: 100%;
+  height: calc(100vh - var(--case-sheet-top));
+  height: calc(100dvh - var(--case-sheet-top));
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px 20px 0 0;
+  background: #fff;
+  box-shadow: 0 -18px 54px rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  transform: translateY(110px) scale(0.965);
+  transform-origin: center top;
+  transition:
+    opacity 420ms ease,
+    transform 720ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.case-sheet.is-open .case-sheet__surface {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.case-sheet__frame {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+  background: #fff;
+}
+
+.case-sheet__close {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  position: fixed;
+  top: calc(var(--case-sheet-top) + 14px);
+  left: 14px;
+  z-index: 42;
+  border-radius: 999px;
+  background: rgba(24, 24, 24, 0.72);
+  color: #fff;
+  opacity: 0;
+  transform: translateY(14px);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transition:
+    opacity 240ms ease 120ms,
+    transform 420ms cubic-bezier(0.22, 1, 0.36, 1) 120ms,
+    background 180ms ease;
+}
+
+.case-sheet.is-open .case-sheet__close {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.case-sheet__close:hover {
+  background: rgba(0, 0, 0, 0.92);
+}
+
+.case-sheet__close span,
+.case-sheet__close span::after {
+  width: 17px;
+  height: 2px;
+  display: block;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.case-sheet__close span {
+  transform: rotate(45deg);
+}
+
+.case-sheet__close span::after {
+  content: "";
+  transform: rotate(90deg);
+}
+
 .is-locked {
   overflow: hidden;
 }
@@ -2303,6 +2386,22 @@ h1 {
   .viewer__hint,
   .viewer__title {
     text-align: center;
+  }
+
+  .case-sheet {
+    --case-sheet-top: 6px;
+  }
+
+  .case-sheet__surface {
+    border-radius: 12px 12px 0 0;
+    transform: translateY(72px) scale(0.98);
+  }
+
+  .case-sheet__close {
+    width: 40px;
+    height: 40px;
+    top: 16px;
+    left: 10px;
   }
 }
 

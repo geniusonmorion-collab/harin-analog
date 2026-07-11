@@ -3,6 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      if (window.self !== window.top) {
+        document.documentElement.classList.add("case-embedded");
+      }
+    </script>
     <meta
       name="description"
       content="Кейс Ювелирцентр: мобильное приложение для ювелирной розничной сети."
@@ -12,7 +17,7 @@
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23161513'/%3E%3Cpath d='M20 18h24v6H30v8h12v6H30v8h15v6H20z' fill='%23fffaf2'/%3E%3C/svg%3E"
     />
-    <link rel="stylesheet" href="../../styles.css?v=case-hq" />
+    <link rel="stylesheet" href="../../styles.css?v=case-sheet" />
   </head>
   <body class="case-page">
     <header class="case-page__header" aria-label="Навигация по кейсу">
@@ -82,11 +87,18 @@
             decoding="async"
           />
         </figure>
-        <div class="case-study__app-mark" aria-label="Иконка приложения U-center">
-          <span class="case-study__app-badge">3</span>
-          <span class="case-study__app-icon">U</span>
-          <span class="case-study__app-name">u-center</span>
-        </div>
+        <figure class="case-study__app-mark">
+          <video
+            src="../../assets/cases/uvelircentr/notification-icon-animation.mp4?v=motion"
+            poster="../../assets/cases/uvelircentr/notification-icon-animation-poster.jpg?v=motion"
+            aria-label="Анимация иконки приложения U-center"
+            preload="metadata"
+            autoplay
+            muted
+            loop
+            playsinline
+          ></video>
+        </figure>
       </section>
 
       <section class="case-study__story" aria-labelledby="main-screen-title">
