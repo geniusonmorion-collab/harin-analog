@@ -162,6 +162,7 @@ h3 {
 }
 
 .case-study__hero img,
+.case-study__hero video,
 .case-study__media img,
 .case-study__media video {
   width: 100%;
@@ -298,7 +299,7 @@ h3 {
 }
 
 .case-study__screen-card {
-  aspect-ratio: 640 / 1000;
+  aspect-ratio: 711 / 1109;
   display: grid;
   place-items: center;
   overflow: hidden;
@@ -307,13 +308,13 @@ h3 {
 }
 
 .case-study__screen-grid--compact .case-study__screen-card {
-  aspect-ratio: 641 / 912;
+  aspect-ratio: 711 / 1109;
 }
 
 .case-study__screen-card img {
-  width: 69%;
-  height: 92%;
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .case-study__caption {
@@ -2435,12 +2436,12 @@ h1 {
 
   .case-study__screen-card,
   .case-study__screen-grid--compact .case-study__screen-card {
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 711 / 1109;
   }
 
   .case-study__screen-card img {
-    width: 66%;
-    height: 92%;
+    width: 100%;
+    height: 100%;
   }
 
   .case-study__caption {
