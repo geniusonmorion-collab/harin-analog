@@ -3,8 +3,10 @@ const cases = [
     title: "Ювелирцентр",
     subtitle: "Mobile app",
     year: "2026",
-    image: "./assets/cases/pd-cover.png",
-    alt: "Обложка кейса Ювелирцентр из Figma PD с мобильными экранами ювелирного приложения",
+    video: "./assets/cases/uvelircentr-cover.mp4",
+    poster: "./assets/cases/uvelircentr-poster.jpg",
+    href: "./cases/uvelircentr/",
+    alt: "Видео-обложка кейса Ювелирцентр с мобильными экранами ювелирного приложения",
     tint: "a",
     category: "Product Design",
     caption: "Mobile app for a jewelry retail chain",
@@ -150,6 +152,11 @@ viewButtons.forEach((button) => {
 gallery.addEventListener("click", (event) => {
   const card = event.target.closest(".case");
   if (!card) return;
+  const item = cases[Number(card.dataset.index)];
+  if (item.href) {
+    window.location.href = item.href;
+    return;
+  }
   openViewer(Number(card.dataset.index));
 });
 
@@ -158,6 +165,11 @@ gallery.addEventListener("keydown", (event) => {
   if (!card) return;
   if (event.key !== "Enter" && event.key !== " ") return;
   event.preventDefault();
+  const item = cases[Number(card.dataset.index)];
+  if (item.href) {
+    window.location.href = item.href;
+    return;
+  }
   openViewer(Number(card.dataset.index));
 });
 
