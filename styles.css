@@ -362,7 +362,8 @@ h3 {
 
 .case-study__media--checkout img {
   object-fit: contain;
-  padding-block: clamp(12px, 1.5vw, 30px);
+  object-position: center bottom;
+  padding: clamp(12px, 1.5vw, 30px) 0 0;
 }
 
 .case-study__editorial + .case-study__screen-grid {
