@@ -22,6 +22,7 @@ const cases = [
     video: "./assets/cases/sber/smart-animate.mp4",
     poster: "./assets/cases/sber/smart-step1.png",
     href: "./cases/sber/?v=sber-synced-start",
+    disabled: true,
     alt: "Обложка кейса Сбер с интерфейсом умного дома",
     tint: "f",
     category: "Product Design",
@@ -171,7 +172,7 @@ function renderGallery() {
   gallery.innerHTML = cases
     .map(
       (item, index) => `
-        <article class="case" data-index="${index}" data-tint="${item.tint}" tabindex="0" role="button" aria-label="Открыть кейс ${item.title}">
+        <article class="case${item.disabled ? " case--disabled" : ""}" data-index="${index}" data-tint="${item.tint}" ${item.disabled ? 'aria-disabled="true"' : `tabindex="0" role="button" aria-label="Открыть кейс ${item.title}"`}>
           ${caseMediaMarkup(item)}
           <div class="case-caption" aria-hidden="true">
             <p class="case-caption__label">${item.title}</p>
@@ -211,7 +212,7 @@ function closeViewer() {
 
 function openCaseSheet(index) {
   const item = cases[index];
-  if (!item?.href) return;
+  if (!item?.href || item.disabled) return;
 
   window.clearTimeout(caseSheetClearTimer);
   caseSheetIndex = index;
@@ -270,6 +271,7 @@ gallery.addEventListener("click", (event) => {
   const card = event.target.closest(".case");
   if (!card) return;
   const item = cases[Number(card.dataset.index)];
+  if (item.disabled) return;
   if (item.href) {
     openCaseSheet(Number(card.dataset.index));
     return;
@@ -280,9 +282,10 @@ gallery.addEventListener("click", (event) => {
 gallery.addEventListener("keydown", (event) => {
   const card = event.target.closest(".case");
   if (!card) return;
+  const item = cases[Number(card.dataset.index)];
+  if (item.disabled) return;
   if (event.key !== "Enter" && event.key !== " ") return;
   event.preventDefault();
-  const item = cases[Number(card.dataset.index)];
   if (item.href) {
     openCaseSheet(Number(card.dataset.index));
     return;

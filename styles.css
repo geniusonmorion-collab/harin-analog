@@ -1166,6 +1166,14 @@ h1 {
   filter: saturate(1.03) contrast(1.01);
 }
 
+.case--disabled {
+  cursor: default;
+}
+
+.case--disabled:hover .gallery {
+  filter: none;
+}
+
 .grid-case,
 .accordion-container {
   display: grid;
