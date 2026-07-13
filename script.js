@@ -21,7 +21,7 @@ const cases = [
     backgroundPoster: "./assets/cases/sber/background-poster.jpg",
     video: "./assets/cases/sber/smart-animate.mp4",
     poster: "./assets/cases/sber/smart-step1.png",
-    href: "./cases/sber/?v=sber-video-cover",
+    href: "./cases/sber/?v=sber-synced-start",
     alt: "Обложка кейса Сбер с интерфейсом умного дома",
     tint: "f",
     category: "Product Design",
@@ -63,26 +63,70 @@ let touchStartY = 0;
 let caseSheetIndex = 0;
 let caseSheetClearTimer = 0;
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const synchronizedPlaybackRequests = new WeakMap();
 
 function pad(value) {
   return String(value).padStart(2, "0");
 }
 
 function layeredSberMedia(item, large = false) {
-  const preload = large ? "auto" : "metadata";
-
   return `
     <div class="sber-cover-media" role="img" aria-label="${item.alt}">
-      <video class="sber-cover-media__background" src="${item.backgroundVideo}" poster="${item.backgroundPoster}" preload="${preload}" autoplay data-autoplay="true" muted loop playsinline aria-hidden="true"></video>
+      <video class="sber-cover-media__background" src="${item.backgroundVideo}" poster="${item.backgroundPoster}" preload="auto" data-autoplay="true" muted loop playsinline aria-hidden="true"></video>
       <div class="sber-cover-media__stage" aria-hidden="true">
-        <video class="sber-cover-media__interface" src="${item.video}" poster="${item.poster}" preload="${preload}" autoplay data-autoplay="true" muted loop playsinline></video>
+        <video class="sber-cover-media__interface" src="${item.video}" poster="${item.poster}" preload="auto" data-autoplay="true" muted loop playsinline></video>
       </div>
     </div>
   `;
 }
 
+function waitUntilPlayable(video) {
+  if (video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
+    return Promise.resolve();
+  }
+
+  return new Promise((resolve) => {
+    video.addEventListener("canplay", resolve, { once: true });
+  });
+}
+
+function syncSberMediaGroup(group) {
+  const videos = [...group.querySelectorAll("video[data-autoplay='true']")];
+  if (!videos.length) return;
+
+  const request = (synchronizedPlaybackRequests.get(group) || 0) + 1;
+  synchronizedPlaybackRequests.set(group, request);
+  videos.forEach((video) => video.pause());
+
+  if (reducedMotion.matches || document.hidden) {
+    if (reducedMotion.matches) {
+      videos.forEach((video) => {
+        video.currentTime = 0;
+      });
+    }
+    return;
+  }
+
+  Promise.all(videos.map(waitUntilPlayable)).then(() => {
+    if (synchronizedPlaybackRequests.get(group) !== request) return;
+    if (reducedMotion.matches || document.hidden) return;
+
+    videos.forEach((video) => {
+      video.currentTime = 0;
+    });
+
+    requestAnimationFrame(() => {
+      videos.forEach((video) => video.play().catch(() => {}));
+    });
+  });
+}
+
 function syncAutoplayVideos(root = document) {
+  root.querySelectorAll(".sber-cover-media").forEach(syncSberMediaGroup);
+
   root.querySelectorAll("video[data-autoplay='true']").forEach((video) => {
+    if (video.closest(".sber-cover-media")) return;
+
     if (reducedMotion.matches || document.hidden) {
       video.pause();
       if (reducedMotion.matches) video.currentTime = 0;
