@@ -17,8 +17,11 @@ const cases = [
     title: "Сбер",
     subtitle: "Smart home",
     year: "2026",
-    image: "./assets/cases/sbernew.png",
-    href: "./cases/sber/?v=sber-smart-case",
+    backgroundVideo: "./assets/cases/sber/background-video.mp4",
+    backgroundPoster: "./assets/cases/sber/background-poster.jpg",
+    video: "./assets/cases/sber/smart-animate.mp4",
+    poster: "./assets/cases/sber/smart-step1.png",
+    href: "./cases/sber/?v=sber-video-cover",
     alt: "Обложка кейса Сбер с интерфейсом умного дома",
     tint: "f",
     category: "Product Design",
@@ -31,6 +34,7 @@ const cases = [
     subtitle: "Mobile payment flow",
     year: "2026",
     image: "./assets/cases/dolinew.png",
+    href: "./cases/dolyami/?v=dolyami-case",
     alt: "Обложка кейса Долями с интерфейсом оплаты частями",
     tint: "e",
     category: "Product Design",
@@ -58,13 +62,41 @@ let wheelLock = false;
 let touchStartY = 0;
 let caseSheetIndex = 0;
 let caseSheetClearTimer = 0;
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 function pad(value) {
   return String(value).padStart(2, "0");
 }
 
+function layeredSberMedia(item, large = false) {
+  const preload = large ? "auto" : "metadata";
+
+  return `
+    <div class="sber-cover-media" role="img" aria-label="${item.alt}">
+      <video class="sber-cover-media__background" src="${item.backgroundVideo}" poster="${item.backgroundPoster}" preload="${preload}" autoplay data-autoplay="true" muted loop playsinline aria-hidden="true"></video>
+      <div class="sber-cover-media__stage" aria-hidden="true">
+        <video class="sber-cover-media__interface" src="${item.video}" poster="${item.poster}" preload="${preload}" autoplay data-autoplay="true" muted loop playsinline></video>
+      </div>
+    </div>
+  `;
+}
+
+function syncAutoplayVideos(root = document) {
+  root.querySelectorAll("video[data-autoplay='true']").forEach((video) => {
+    if (reducedMotion.matches || document.hidden) {
+      video.pause();
+      if (reducedMotion.matches) video.currentTime = 0;
+      return;
+    }
+
+    video.play().catch(() => {});
+  });
+}
+
 function coverMarkup(item, large = false) {
-  const media = item.video
+  const media = item.backgroundVideo
+    ? layeredSberMedia(item, large)
+    : item.video
     ? `<video src="${item.video}" poster="${item.poster}" aria-label="${item.alt}" preload="${large ? "auto" : "metadata"}" autoplay muted loop playsinline></video>`
     : `<img src="${item.image}" alt="${item.alt}" loading="${large ? "eager" : "lazy"}" decoding="async" />`;
 
@@ -76,7 +108,9 @@ function coverMarkup(item, large = false) {
 }
 
 function caseMediaMarkup(item) {
-  const media = item.video
+  const media = item.backgroundVideo
+    ? layeredSberMedia(item)
+    : item.video
     ? `<video src="${item.video}" poster="${item.poster}" aria-label="${item.alt}" preload="auto" autoplay data-autoplay="true" muted loop playsinline></video>`
     : `<img src="${item.image}" alt="${item.alt}" loading="lazy" decoding="async" />`;
 
@@ -109,6 +143,7 @@ function renderGallery() {
 function renderViewer() {
   const item = cases[activeIndex];
   viewerStage.innerHTML = coverMarkup(item, true);
+  syncAutoplayVideos(viewerStage);
   viewerCount.textContent = `${pad(activeIndex + 1)} / ${pad(cases.length)}`;
   viewerTitle.textContent = item.title;
 }
@@ -162,6 +197,12 @@ function showNext(direction) {
 }
 
 renderGallery();
+syncAutoplayVideos(gallery);
+reducedMotion.addEventListener?.("change", () => syncAutoplayVideos());
+
+document.addEventListener("visibilitychange", () => {
+  syncAutoplayVideos();
+});
 
 viewButtons.forEach((button) => {
   button.addEventListener("click", () => {

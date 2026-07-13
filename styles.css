@@ -562,7 +562,17 @@ h3 {
   background: #000;
 }
 
-.sber-case__motion video {
+.sber-case__background {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  background: #000;
+}
+
+.sber-case__interface {
   width: 62.88%;
   height: 63.064%;
   display: block;
@@ -1037,6 +1047,44 @@ h1 {
   height: 100%;
   display: block;
   object-fit: cover;
+}
+
+.sber-cover-media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+.sber-cover-media > .sber-cover-media__background {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+}
+
+.sber-cover-media__stage {
+  width: 100%;
+  aspect-ratio: 1972 / 1110;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.sber-cover-media__stage > .sber-cover-media__interface {
+  width: 62.88%;
+  height: 63.064%;
+  display: block;
+  position: absolute;
+  top: 18.468%;
+  right: auto;
+  bottom: auto;
+  left: 18.56%;
+  object-fit: cover;
+  background: #000;
 }
 
 .case:first-of-type .slide img,
@@ -2818,7 +2866,7 @@ h1 {
     aspect-ratio: 62 / 35;
   }
 
-  .sber-case__motion video {
+  .sber-case__interface {
     width: 100%;
     height: 100%;
     inset: 0;
@@ -2873,5 +2921,97 @@ h1 {
   .case-study__outro-copy,
   .case-study__outro > p {
     margin-top: 0;
+  }
+}
+
+.case-study__hero--dolyami {
+  aspect-ratio: 1968 / 1342;
+}
+
+.case-study__product-showcase--dolyami {
+  grid-template-columns: minmax(0, 1593fr) minmax(240px, 371fr);
+}
+
+.case-study__media--hand-dolyami {
+  aspect-ratio: 1592 / 1062;
+  border-radius: 5px;
+}
+
+.case-study__app-tile-dolyami {
+  aspect-ratio: 356 / 346;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 5px;
+  background: linear-gradient(121deg, #f6f6f6 10.79%, #e7e7e7 89.21%);
+}
+
+.case-study__app-tile-dolyami img {
+  width: 44.4%;
+  border-radius: 18%;
+}
+
+.case-study__benchmark-visual--dolyami {
+  aspect-ratio: 1972 / 966;
+}
+
+.case-study__benchmark-visual--dolyami img {
+  position: absolute;
+  top: 2.28%;
+  left: 2.28%;
+  width: 95.54%;
+  height: 95.45%;
+  object-fit: contain;
+}
+
+.case-study__interview-collage {
+  aspect-ratio: 1972 / 847;
+  position: relative;
+}
+
+.case-study__interview-collage img {
+  position: absolute;
+  height: auto;
+}
+
+.case-study__interview-collage img:nth-of-type(1) {
+  top: 0;
+  left: 10.6%;
+  width: 82.96%;
+  z-index: 3;
+}
+
+.case-study__interview-collage img:nth-of-type(2) {
+  top: 35.54%;
+  left: 16.89%;
+  width: 66.2%;
+  z-index: 2;
+}
+
+.case-study__interview-collage img:nth-of-type(3) {
+  top: 63.64%;
+  left: 23.53%;
+  width: 57.1%;
+  z-index: 1;
+}
+
+.case-study__media--dolyami-panel {
+  aspect-ratio: 1972 / 1223;
+  border-radius: 5px;
+}
+
+@media (max-width: 780px) {
+  .case-study__hero--dolyami {
+    aspect-ratio: 4 / 3;
+  }
+
+  .case-study__product-showcase--dolyami {
+    grid-template-columns: 1fr;
+  }
+
+  .case-study__app-tile-dolyami {
+    width: 42%;
+    min-width: 280px;
+    justify-self: end;
   }
 }
