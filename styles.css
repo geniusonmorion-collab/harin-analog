@@ -312,48 +312,14 @@ h3 {
 
 .case-study__benchmark-phone {
   min-width: 0;
-  position: relative;
-  isolation: isolate;
-}
-
-.case-study__benchmark-screen,
-.case-study__benchmark-bezel {
-  display: block;
-  position: absolute;
-}
-
-.case-study__benchmark-screen {
-  width: 84.5161%;
-  height: 92.2993%;
-  top: 3.9046%;
-  left: 7.7419%;
-  border-radius: 14% / 6.5%;
-  background: #fff;
-  object-fit: cover;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
-}
-
-.case-study__benchmark-phone--lamoda .case-study__benchmark-screen {
-  height: 92.4078%;
-  top: 3.7961%;
-}
-
-.case-study__benchmark-phone--poison-drop .case-study__benchmark-screen {
-  width: 84.3011%;
-  height: 92.9501%;
-  top: 3.4707%;
-  left: 7.957%;
-}
-
-.case-study__benchmark-phone--farfetch .case-study__benchmark-screen {
-  height: 92.6247%;
-  top: 3.6876%;
-}
-
-.case-study__benchmark-bezel {
   width: 100%;
   height: 100%;
-  inset: 0;
+}
+
+.case-study__benchmark-phone img {
+  width: 100%;
+  height: 100%;
+  display: block;
   object-fit: contain;
 }
 
