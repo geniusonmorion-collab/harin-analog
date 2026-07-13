@@ -103,6 +103,9 @@ h3 {
   --case-gap: clamp(4px, 0.5vw, 10px);
   --case-tight-gap: clamp(8px, 0.52vw, 10px);
   --case-feature-gap: clamp(18px, 1.42vw, 28px);
+  --case-copy-width: clamp(360px, 29.65vw, 585px);
+  --case-text-space: clamp(56px, 4.36vw, 86px);
+  --case-text-min-height: clamp(320px, 21vw, 414px);
   min-height: 100vh;
   background: #fff;
   color: var(--ink);
@@ -188,7 +191,7 @@ h3 {
 .case-study__intro {
   min-height: clamp(360px, 28.45vw, 561px);
   display: grid;
-  grid-template-columns: minmax(320px, 1fr) repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(320px, 1fr) repeat(2, minmax(0, var(--case-copy-width)));
   gap: clamp(34px, 5vw, 100px);
   padding: clamp(24px, 1.7vw, 34px) 8px 40px;
 }
@@ -215,6 +218,8 @@ h3 {
 }
 
 .case-study__intro-copy {
+  width: 100%;
+  max-width: var(--case-copy-width);
   display: grid;
   align-content: start;
   gap: 26px;
@@ -260,16 +265,16 @@ h3 {
 }
 
 .case-study__process-copy {
-  min-height: clamp(320px, 18.25vw, 360px);
+  min-height: var(--case-text-min-height);
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--case-gap);
-  padding: clamp(60px, 4.36vw, 86px) 8px 40px;
+  padding: var(--case-text-space) 8px;
 }
 
 .case-study__process-section--discovery .case-study__process-copy {
-  min-height: clamp(300px, 17.8vw, 351px);
-  padding-top: clamp(52px, 3.1vw, 61px);
+  min-height: var(--case-text-min-height);
+  padding-block: var(--case-text-space);
 }
 
 .case-study__process-copy h2,
@@ -286,7 +291,8 @@ h3 {
 
 .case-study__process-copy p {
   grid-column: 3 / 5;
-  max-width: 696px;
+  width: 100%;
+  max-width: var(--case-copy-width);
   padding-top: 0;
 }
 
@@ -370,15 +376,15 @@ h3 {
 }
 
 .case-study__process-section--discovery + .case-study__story {
-  margin-top: clamp(40px, 3.05vw, 60px);
+  margin-top: 0;
 }
 
 .case-study__story {
-  min-height: clamp(390px, 30.8vw, 608px);
+  min-height: var(--case-text-min-height);
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr) repeat(2, minmax(0, var(--case-copy-width)));
   gap: clamp(34px, 5vw, 100px);
-  padding: 0 8px 40px;
+  padding: var(--case-text-space) 8px;
 }
 
 .case-study__story h2,
@@ -389,7 +395,9 @@ h3 {
 }
 
 .case-study__story p {
-  padding-top: clamp(78px, 7.3vw, 144px);
+  width: 100%;
+  max-width: var(--case-copy-width);
+  padding-top: 0;
 }
 
 .case-study__main-motion {
@@ -442,11 +450,11 @@ h3 {
 }
 
 .case-study__caption {
-  min-height: clamp(240px, 18.4vw, 364px);
+  min-height: var(--case-text-min-height);
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--case-gap);
-  padding: clamp(36px, 2.4vw, 48px) 8px 44px;
+  padding: var(--case-text-space) 8px;
 }
 
 .case-study__caption h2 {
@@ -454,9 +462,10 @@ h3 {
 }
 
 .case-study__caption p {
-  grid-column: 3;
-  align-self: end;
-  max-width: 450px;
+  grid-column: 3 / 5;
+  align-self: start;
+  width: 100%;
+  max-width: var(--case-copy-width);
 }
 
 .case-study__split {
@@ -489,8 +498,9 @@ h3 {
 }
 
 .case-study__editorial p {
-  max-width: 450px;
-  margin: clamp(80px, 14.5vw, 286px) auto 0;
+  width: 100%;
+  max-width: var(--case-copy-width);
+  margin: var(--case-text-space) auto 0;
 }
 
 .case-study__media--checkout {
@@ -548,6 +558,8 @@ h3 {
 
 .case-study__outro-copy {
   grid-column: 3;
+  width: 100%;
+  max-width: var(--case-copy-width);
   display: grid;
   gap: 28px;
   margin-top: clamp(90px, 12vw, 236px);
@@ -2637,6 +2649,7 @@ h1 {
 
 @media (max-width: 720px) {
   .case-page {
+    --case-copy-width: 100%;
     font-size: 16px;
     line-height: 1.35;
   }
@@ -2687,7 +2700,7 @@ h1 {
 
   .case-study__story {
     gap: 28px;
-    padding: 72px 8px;
+    padding: 56px 8px;
   }
 
   .case-study__process-copy,
@@ -2695,7 +2708,7 @@ h1 {
     min-height: 0;
     grid-template-columns: 1fr;
     gap: 28px;
-    padding: 56px 8px 48px;
+    padding: 56px 8px;
   }
 
   .case-study__process-copy h2,
@@ -2746,7 +2759,7 @@ h1 {
   }
 
   .case-study__process-section--discovery + .case-study__story {
-    margin-top: 40px;
+    margin-top: 0;
   }
 
   .case-study__main-motion {
@@ -2774,8 +2787,8 @@ h1 {
 
   .case-study__caption {
     min-height: 0;
-    gap: 36px;
-    padding: 56px 8px 76px;
+    gap: 28px;
+    padding: 56px 8px;
   }
 
   .case-study__caption p {
