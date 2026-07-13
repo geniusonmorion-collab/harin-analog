@@ -520,8 +520,13 @@ h3 {
   aspect-ratio: 1349 / 1261;
 }
 
-.case-study__media--ring {
-  aspect-ratio: 588 / 824;
+.case-study__media--final-photo {
+  aspect-ratio: 1952 / 1105;
+  border-radius: 5px;
+}
+
+.case-study__media--final-photo img {
+  object-fit: cover;
 }
 
 .case-study__outro {
