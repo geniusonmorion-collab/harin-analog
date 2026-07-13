@@ -43,6 +43,22 @@ const cases = [
     description:
       "Checkout and installment-flow research: reframing payment by parts as budget control rather than a credit-like experience.",
   },
+  {
+    title: "KERN®",
+    subtitle: "Promo site (Awwwards HM)",
+    year: "2025",
+    video: "./assets/cases/kern/kern-home-preview.mp4",
+    poster: "./assets/cases/kern/kern-home-poster.jpg",
+    href: "https://kern.taptop.site/",
+    external: true,
+    wide: true,
+    alt: "Видеообложка промосайта KERN",
+    tint: "b",
+    category: "Web Design, 3D Design",
+    caption: "Promo site · Awwwards HM",
+    description:
+      "Brand concept, 3D ski model, art direction, website design and production. Seven international awards, including Awwwards Honorable Mention.",
+  },
 ];
 
 const gallery = document.querySelector("#gallery");
@@ -172,7 +188,7 @@ function renderGallery() {
   gallery.innerHTML = cases
     .map(
       (item, index) => `
-        <article class="case${item.disabled ? " case--disabled" : ""}" data-index="${index}" data-tint="${item.tint}" ${item.disabled ? 'aria-disabled="true"' : `tabindex="0" role="button" aria-label="Открыть кейс ${item.title}"`}>
+        <article class="case${item.disabled ? " case--disabled" : ""}${item.wide ? " case--wide" : ""}" data-index="${index}" data-tint="${item.tint}" ${item.disabled ? 'aria-disabled="true"' : `tabindex="0" role="button" aria-label="${item.external ? "Открыть сайт" : "Открыть кейс"} ${item.title}"`}>
           ${caseMediaMarkup(item)}
           <div class="case-caption" aria-hidden="true">
             <p class="case-caption__label">${item.title}</p>
@@ -241,6 +257,23 @@ function showNext(direction) {
   renderViewer();
 }
 
+function activateCase(index) {
+  const item = cases[index];
+  if (!item || item.disabled) return;
+
+  if (item.external) {
+    window.location.href = item.href;
+    return;
+  }
+
+  if (item.href) {
+    openCaseSheet(index);
+    return;
+  }
+
+  openViewer(index);
+}
+
 renderGallery();
 syncAutoplayVideos(gallery);
 reducedMotion.addEventListener?.("change", () => syncAutoplayVideos());
@@ -270,13 +303,7 @@ viewButtons.forEach((button) => {
 gallery.addEventListener("click", (event) => {
   const card = event.target.closest(".case");
   if (!card) return;
-  const item = cases[Number(card.dataset.index)];
-  if (item.disabled) return;
-  if (item.href) {
-    openCaseSheet(Number(card.dataset.index));
-    return;
-  }
-  openViewer(Number(card.dataset.index));
+  activateCase(Number(card.dataset.index));
 });
 
 gallery.addEventListener("keydown", (event) => {
@@ -286,11 +313,7 @@ gallery.addEventListener("keydown", (event) => {
   if (item.disabled) return;
   if (event.key !== "Enter" && event.key !== " ") return;
   event.preventDefault();
-  if (item.href) {
-    openCaseSheet(Number(card.dataset.index));
-    return;
-  }
-  openViewer(Number(card.dataset.index));
+  activateCase(Number(card.dataset.index));
 });
 
 closeButton.addEventListener("click", closeViewer);

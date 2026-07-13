@@ -999,6 +999,10 @@ h1 {
   grid-column: 1 / -1;
 }
 
+.case--wide {
+  grid-column: 1 / -1;
+}
+
 .case:focus-visible {
   outline: 1px solid currentColor;
   outline-offset: 5px;
@@ -1021,6 +1025,10 @@ h1 {
 
 .case:not(:first-child) .gallery {
   aspect-ratio: 952 / 1292;
+}
+
+.case--wide:not(:first-child) .gallery {
+  aspect-ratio: 1280 / 760;
 }
 
 .gallery-track {
