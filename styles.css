@@ -101,6 +101,7 @@ h3 {
 
 .case-page {
   --case-gap: clamp(4px, 0.5vw, 10px);
+  --case-card-gap: clamp(6px, 0.75vw, 15px);
   --case-tight-gap: clamp(8px, 0.52vw, 10px);
   --case-feature-gap: clamp(18px, 1.42vw, 28px);
   --case-copy-width: clamp(360px, 29.65vw, 585px);
@@ -174,7 +175,7 @@ h3 {
 .case-study__hero {
   aspect-ratio: 1972 / 1310;
   overflow: hidden;
-  border-radius: 5px;
+  border-radius: 0;
   background: #eeeeed;
 }
 
@@ -241,7 +242,7 @@ h3 {
 
 .case-study__media--product {
   aspect-ratio: 1433 / 945;
-  border-radius: 5px;
+  border-radius: 0;
 }
 
 .case-study__app-mark {
@@ -250,7 +251,7 @@ h3 {
   place-items: center;
   position: relative;
   overflow: hidden;
-  border-radius: 5px;
+  border-radius: 0;
   background: linear-gradient(131deg, #f6f6f6 11%, #e7e7e7 89%);
 }
 
@@ -301,7 +302,7 @@ h3 {
   aspect-ratio: 1952 / 1009;
   position: relative;
   overflow: hidden;
-  border-radius: 5px;
+  border-radius: 0;
   background: linear-gradient(138.48deg, #f6f6f6 10.79%, #f1f1f1 89.21%);
 }
 
@@ -336,7 +337,7 @@ h3 {
   top: var(--tile-y);
   left: var(--tile-x);
   overflow: hidden;
-  border-radius: 5px;
+  border-radius: 0;
   background: #fff;
 }
 
@@ -404,7 +405,7 @@ h3 {
   aspect-ratio: 1952 / 1060;
   position: relative;
   overflow: hidden;
-  border-radius: 5px;
+  border-radius: 0;
   background: linear-gradient(137.08deg, #f7f7f7 10.79%, #eaeaea 89.21%);
 }
 
@@ -427,7 +428,7 @@ h3 {
 .case-study__screen-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(6px, 0.75vw, 15px);
+  gap: var(--case-card-gap);
 }
 
 .case-study__screen-card {
@@ -435,7 +436,7 @@ h3 {
   display: grid;
   place-items: center;
   overflow: hidden;
-  border-radius: 5px;
+  border-radius: 0;
   background: linear-gradient(110deg, #f6f6f6 11%, #e7e7e7 89%);
 }
 
@@ -499,7 +500,7 @@ h3 {
 
 .case-study__editorial {
   display: grid;
-  grid-template-columns: minmax(0, 1295fr) minmax(260px, 657fr);
+  grid-template-columns: minmax(0, calc((200% - var(--case-card-gap)) / 3)) minmax(260px, 1fr);
   gap: var(--case-gap);
   align-items: start;
 }
@@ -547,7 +548,7 @@ h3 {
 
 .case-study__media--final-photo {
   aspect-ratio: 1952 / 1105;
-  border-radius: 5px;
+  border-radius: 0;
 }
 
 .case-study__media--final-photo img {

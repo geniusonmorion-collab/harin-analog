@@ -5,7 +5,7 @@ const cases = [
     year: "2026",
     video: "./assets/cases/uvelircentr-cover.mp4?v=hq-source",
     poster: "./assets/cases/uvelircentr-poster.jpg?v=hq-source",
-    href: "./cases/uvelircentr/?v=metrics-copy-split",
+    href: "./cases/uvelircentr/?v=square-content-grid",
     alt: "Видео-обложка кейса Ювелирцентр с мобильными экранами ювелирного приложения",
     tint: "a",
     category: "Product Design",
