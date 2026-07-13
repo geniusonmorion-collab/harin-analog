@@ -555,6 +555,31 @@ h3 {
   object-fit: cover;
 }
 
+.sber-case__motion {
+  aspect-ratio: 1972 / 1110;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+.sber-case__motion video {
+  width: 62.88%;
+  height: 63.064%;
+  display: block;
+  position: absolute;
+  top: 18.468%;
+  left: 18.56%;
+  object-fit: cover;
+  background: #000;
+}
+
+.sber-case .case-study__caption h1 {
+  grid-column: 1;
+  font-size: inherit;
+  font-weight: 400;
+  line-height: inherit;
+}
+
 .case-study__outro {
   min-height: clamp(600px, 52vw, 1027px);
   display: grid;
@@ -2699,6 +2724,7 @@ h1 {
   .case-study__facts,
   .case-study__story h2,
   .case-study__caption h2,
+  .sber-case .case-study__caption h1,
   .case-study__caption p,
   .case-study__caption-copy,
   .case-study__outro h2,
@@ -2786,6 +2812,16 @@ h1 {
 
   .case-study__main-motion video {
     width: 100%;
+  }
+
+  .sber-case__motion {
+    aspect-ratio: 62 / 35;
+  }
+
+  .sber-case__motion video {
+    width: 100%;
+    height: 100%;
+    inset: 0;
   }
 
   .case-study__screen-grid {

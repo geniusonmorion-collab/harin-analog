@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      if (window.self !== window.top) {
+        document.documentElement.classList.add("case-embedded");
+      }
+    </script>
+    <meta
+      name="description"
+      content="Кейс Сбер: интерфейс умного дома и анимационный сценарий для СберТВ."
+    />
+    <title>Сбер — Анастасия Кузнецова</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23000000'/%3E%3Cpath d='M20 18h24v6H30v8h12v6H30v8h15v6H20z' fill='%23fff'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="../../styles.css?v=sber-smart-case" />
+  </head>
+  <body class="case-page sber-case-page">
+    <header class="case-page__header" aria-label="Навигация по кейсу">
+      <a class="case-page__back" href="../../">Назад</a>
+      <span>Сбер</span>
+      <span class="case-page__year">2026</span>
+    </header>
+
+    <main class="case-study sber-case">
+      <figure class="sber-case__motion" aria-label="Анимационный сценарий интерфейса СберТВ">
+        <video
+          poster="../../assets/cases/sber/smart-step1.png"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+        >
+          <source src="../../assets/cases/sber/smart-animate.mp4" type="video/mp4" />
+        </video>
+      </figure>
+
+      <section class="case-study__caption" aria-labelledby="sber-case-title">
+        <h1 id="sber-case-title">Сбер</h1>
+        <div class="case-study__caption-copy">
+          <p>
+            Концепция продуктового интерфейса для&nbsp;экосистемы умных устройств:
+            домашние сценарии, управление устройствами и&nbsp;взаимодействие
+            с&nbsp;ассистентом.
+          </p>
+          <p>
+            Пять состояний интерфейса объединены в&nbsp;единый сценарий фонового
+            режима СберТВ. Переходы воспроизводятся автоматически и&nbsp;образуют
+            непрерывный цикл.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <script src="./sber.js?v=sber-smart-case"></script>
+  </body>
+</html>

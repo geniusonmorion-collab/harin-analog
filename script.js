@@ -18,6 +18,7 @@ const cases = [
     subtitle: "Smart home",
     year: "2026",
     image: "./assets/cases/sbernew.png",
+    href: "./cases/sber/?v=sber-smart-case",
     alt: "Обложка кейса Сбер с интерфейсом умного дома",
     tint: "f",
     category: "Product Design",
